@@ -1,0 +1,32 @@
+package practice1;
+
+public class ReverseBits_190 {
+
+    public static int reverseBits(int n) {
+        int res = 0;
+        int count = 0;
+        while (count<32){
+            res <<= 1;
+            res |= (n & 1);
+            n >>= 1;
+            count ++;
+        }
+        return res;
+    }
+
+    // 对这互换方向
+    public int reverseBits_1(int n) {
+        n = ((n & 0xffff0000) >>> 16) | ((n & 0x0000ffff) << 16);
+        n = ((n & 0xff00ff00) >>> 8) | ((n & 0x00ff00ff) << 8);
+        n = ((n & 0xf0f0f0f0) >>> 4) | ((n & 0x0f0f0f0f) << 4);
+        n = ((n & 0xcccccccc) >>> 2) | ((n & 0x33333333) << 2);
+        n = ((n & 0xaaaaaaaa) >>> 1) | ((n & 0x55555555) << 1);
+        return n;
+    }
+
+    public static void main(String[] args) {
+        // 00000010100101000001111010011100 43261596 ==> 964176192
+        // 11111111111111111111111111111101 -3 ==> -1073741825
+        System.out.println(reverseBits(-3));
+    }
+}
